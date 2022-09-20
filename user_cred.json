@@ -1,0 +1,43 @@
+{
+    "user_details": [
+        {
+            "name": "abc",
+            "bio": "abcdefg",
+            "phone": "1234567",
+            "email": "mhgfdfg",
+            "password": "ndvdjsb"
+        },
+        {
+            "name": "dfghjkhgg",
+            "bio": "cvbnmnb",
+            "phone": "cdfghjhg",
+            "email": "fghjkjhgf",
+            "password": "fghjhgvfghnjmn",
+            "location": "profile_data/download.jpeg"
+        },
+        {
+            "name": "lkmjn",
+            "bio": "lkjmn",
+            "phone": ";lkjn",
+            "email": "lkjn",
+            "password": "lkjn",
+            "location": "profile_data/b57a44d9-627f-4e17-9312-3a5786b2fb46download.jpeg"
+        },
+        {
+            "name": "kjuhgf",
+            "bio": "kjhg",
+            "phone": "kljhg",
+            "email": "kjhgf",
+            "password": "cvbnm",
+            "location": "profile_data/450a4b69-7a87-4ff0-a56a-3cd2102e6048download.jpeg"
+        },
+        {
+            "name": "12345",
+            "bio": "12345",
+            "phone": "1234565489",
+            "email": "m@g.co",
+            "password": "1234ewsdfre",
+            "location": "profile_data/5471a39e-b6eb-45d8-89f0-8913f47e6378download.jpeg"
+        }
+    ]
+}
