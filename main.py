@@ -50,18 +50,18 @@ def login(email, password):
     # TODO: Research on google authentication
     with open('user_cred.json', 'r+') as fd:
         existing_data = json.load(fd)
-        for i in existing_data["user_details"]:
+        for index, i in enumerate(existing_data["user_details"]):
             if i["email"] == email and i["password"] == password:
-                return {"Message": "Login Successfully"}
+                return {"Message": "Login Successfully", "id": index}
         raise HTTPException(status_code=401, detail="Login Error!!!")
 
 
 @app.get("/profile")
-def get_profile(email):
+def get_profile(id):
     with open('user_cred.json', 'r+') as fd:
         existing_data = json.load(fd)
         for index, i in enumerate(existing_data["user_details"]):
-            if i["email"] == email:
+            if int(id) == index:
                 return {
                     "id": index,
                     "data": i
@@ -70,17 +70,34 @@ def get_profile(email):
 
 
 @app.post("/profile")
-def update_profile(id, name, bio, phone, email, password):
+async def update_profile(id, name, bio, phone, email, password, photo: UploadFile = File(...)):
     try:
+        files = os.listdir('profile_data')
+        location = str()
+        if photo.filename in files:
+            location = f'profile_data/{uuid.uuid4()}{photo.filename}'
+        else:
+            location = f'profile_data/{photo.filename}'
+
+        data = {"name": name, "bio": bio, "phone": phone, "email": email, "password": password, "location": location}
+        User(**data)
+
+        with open(location, 'wb') as f:
+            f.write(photo.file.read())
+            f.close()
+
         with open('user_cred.json', 'r+') as fd:
             existing_data = json.load(fd)
-            data = existing_data["user_details"][id]
-            data["name"] = name
-            data["bio"] = bio
-            data["phone"] = phone
-            data["email"] = email
-            data["password"] = password
-            return {"Message": "User Profile Updated Successfully"}
+            id = int(id)
+            existing_data["user_details"][id]["name"] = name
+            existing_data["user_details"][id]["bio"] = bio
+            existing_data["user_details"][id]["phone"] = phone
+            existing_data["user_details"][id]["email"] = email
+            existing_data["user_details"][id]["password"] = password
+            existing_data["user_details"][id]["location"] = location
+            fd.seek(0)
+            json.dump(existing_data, fd, indent=4)
+        return {"Message": "User Profile Updated Successfully"}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=f"{e}")
     except Exception as e:
