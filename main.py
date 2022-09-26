@@ -61,7 +61,7 @@ async def read_user_details(name, bio, phone, email, password, photo: UploadFile
         raise HTTPException(status_code=500, detail=f"Registration Issue!!!")
 
 
-@app.put("/login")
+@app.get("/login")
 def login(email, password):
     # TODO: Research on google authentication
     with open('user_cred.json', 'r+') as fd:
