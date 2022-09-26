@@ -1,10 +1,22 @@
-from fastapi import FastAPI, HTTPException, File, UploadFile
+from fastapi import FastAPI, HTTPException, File, UploadFile, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, EmailStr
 import json
 import os
 import uuid
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class User(BaseModel):
@@ -15,6 +27,10 @@ class User(BaseModel):
     password: str
     location: str
 
+@app.get("/")
+async def landing() -> dict:
+    return {"message": "Welcome to Authenticator Backend. visit the below link for documentation :- "
+                       "http://127.0.0.1:8000/docs"}
 
 @app.post("/registration")
 async def read_user_details(name, bio, phone, email, password, photo: UploadFile = File(...)):
@@ -45,7 +61,7 @@ async def read_user_details(name, bio, phone, email, password, photo: UploadFile
         raise HTTPException(status_code=500, detail=f"Registration Issue!!!")
 
 
-@app.get("/login")
+@app.put("/login")
 def login(email, password):
     # TODO: Research on google authentication
     with open('user_cred.json', 'r+') as fd:

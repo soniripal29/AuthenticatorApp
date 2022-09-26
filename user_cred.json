@@ -38,6 +38,30 @@
             "email": "m@g.co",
             "password": "1234ewsdfre",
             "location": "profile_data/5471a39e-b6eb-45d8-89f0-8913f47e6378download.jpeg"
+        },
+        {
+            "name": "Manpreet Singh",
+            "bio": "Singh is King",
+            "phone": "5199657861",
+            "email": "singh@gmail.com",
+            "password": "1234",
+            "location": "profile_data/c80d5d7e-4dea-4ce9-b9c5-8cffa587424bdownload.jpeg"
+        },
+        {
+            "name": "wsedfvgbhnj",
+            "bio": "wsdfvgb",
+            "phone": "12345678",
+            "email": "kjhg@gmail.com",
+            "password": "lkjhgfdfghj",
+            "location": "profile_data/09f3f0b6-2bce-4aa3-940f-ca48572080fadownload.jpeg"
+        },
+        {
+            "name": "wsedfvgbhnj",
+            "bio": "wsdfvgb",
+            "phone": "12345678",
+            "email": "kjhg@gmail.com",
+            "password": "lkjhgfdfghj",
+            "location": "profile_data/70f6d4ae-3351-456c-bc79-09b2361f6ee7download.jpeg"
         }
     ]
 }
