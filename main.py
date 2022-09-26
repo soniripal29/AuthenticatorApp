@@ -25,29 +25,28 @@ class User(BaseModel):
     phone: int
     email: EmailStr
     password: str
-    location: str
 
 @app.get("/")
 async def landing() -> dict:
     return {"message": "Welcome to Authenticator Backend. visit the below link for documentation :- "
                        "http://127.0.0.1:8000/docs"}
 
-@app.post("/registration")
-async def read_user_details(name, bio, phone, email, password, photo: UploadFile = File(...)):
+@app.get("/registration")
+async def read_user_details(name, bio, phone, email, password):
     try:
         files = os.listdir('profile_data')
         location = str()
-        if photo.filename in files:
+        """if photo.filename in files:
             location = f'profile_data/{uuid.uuid4()}{photo.filename}'
         else:
-            location = f'profile_data/{photo.filename}'
+            location = f'profile_data/{photo.filename}'"""
 
-        data = {"name": name, "bio": bio, "phone": phone, "email": email, "password": password, "location": location}
+        data = {"name": name, "bio": bio, "phone": phone, "email": email, "password": password}
         User(**data)
 
-        with open(location, 'wb') as f:
+        """with open(location, 'wb') as f:
             f.write(photo.file.read())
-            f.close()
+            f.close()"""
 
         with open('user_cred.json', 'r+') as fd:
             existing_data = json.load(fd)
